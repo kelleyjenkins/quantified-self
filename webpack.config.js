@@ -1,10 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: {
-    main: ["./lib/index.js","./lib/foods.js"],
-    test: "mocha!./test/index.js"
-  },
+  entry:["./index.js" , "./foods.js"],
   output: {
     path: __dirname,
     filename: "[name].bundle.js"
