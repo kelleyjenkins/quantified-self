@@ -130,7 +130,7 @@
 	    });
 	};
 
-	$('.food-form').click(createFood);
+	$('.food-button').click(createFood);
 
 	getfood();
 
