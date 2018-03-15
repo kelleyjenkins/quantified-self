@@ -2,12 +2,12 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: "./lib/index.js",
+    main: ["./lib/index.js","./lib/foods.js"],
     test: "mocha!./test/index.js"
   },
   output: {
-    path : path.join(__dirname, './'),
-    filename : 'foods.js'
+    path: __dirname,
+    filename: "[name].bundle.js"
   },
   module: {
     loaders: [
