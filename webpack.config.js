@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     path : path.join(__dirname, './'),
-    filename : 'index.js'
+    filename : 'foods.js'
   },
   module: {
     loaders: [
