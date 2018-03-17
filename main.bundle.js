@@ -111,12 +111,22 @@
 	    });
 	};
 
-	var createFood = exports.createFood = function createFood(event) {
+	var validateForm = exports.validateForm = function validateForm(event) {
 	    event.preventDefault();
-	    var $foodName = $('.name-input').val();
-	    var $foodCal = $('.cal-input').val();
-	    var food = { name: $foodName,
-	        calories: $foodCal };
+
+	    var foodName = $('.name-input').val();
+	    var foodCal = $('.cal-input').val();
+	    if (foodName === "") {
+	        $('.food-form').append('<div>Please fill out the food </div>');
+	    } else if (foodCal === "") {
+	        $('.food-form').append('<div>Please fill out the calories</div>');
+	    } else createFood(foodName, foodCal);
+	};
+
+	var createFood = exports.createFood = function createFood(foodName, cal, event) {
+
+	    var food = { name: foodName,
+	        calories: cal };
 
 	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods', {
 	        headers: { 'Accept': 'application/json',
@@ -130,7 +140,7 @@
 	    });
 	};
 
-	$('.food-button').click(createFood);
+	$('.food-button').click(validateForm);
 
 	getfood();
 
