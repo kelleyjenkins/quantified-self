@@ -11,7 +11,7 @@
 <h2> Foods </h2>
 <button type="button" name="Create New" class="new-food">Create New</button>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+
 <h1> Quantified Self </h1>
 <div class='meal-container'>
   <table class = "meal-table">
@@ -31,7 +31,7 @@
   <tr class="calories-consumed">
     <td>Calories Consumed</td>
   </tr>
-  <tr class="calories-remaining">
+  <tr class="calories-remaining" id="calories-remaining">
     <td>Remaining Calories</td>
   </tr>
 </table>
@@ -41,14 +41,13 @@
 
   </div>
 <div class='food-container'>
-  <table class = 'meal-food-table'>
+  <h2>Food</h2>
+  <input type="text" id="search-meal-food" placeholder="Filter by Name">
+  <table class='meal-food-table' id ='meal-food-table'>
     <tr>
-      <th>Food</th>
+      <th>Name</th>
+      <th>Calories</th>
     </tr>
-    <tr>
-      <th>name</th>
-      <th>calories</th>
-      </tr>
   </table>
   </div>
 
