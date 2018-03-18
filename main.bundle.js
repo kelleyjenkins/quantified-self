@@ -64,7 +64,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.showMeals = exports.addSelected = exports.MealFoodTable = exports.getMealFood = exports.getCalories = exports.totals = exports.getMeals = undefined;
+	exports.sortCals = exports.searchFoods = exports.showMeals = exports.addSelected = exports.MealFoodTable = exports.getMealFood = exports.getCalories = exports.changeColor = exports.totals = exports.getMeals = undefined;
 	exports.handleMealClick = handleMealClick;
 	exports.updateMealFood = updateMealFood;
 	exports.handleMealDelete = handleMealDelete;
@@ -83,6 +83,14 @@
 
 	$('.meal-container').on('click', '.meal-table .meal-row .food-delete', function () {
 	    handleMealDelete.call(this);
+	});
+
+	$('#search-meal-food').on('keyup', function () {
+	    searchFoods();
+	});
+
+	$('#cals').on('click', function () {
+	    sortCals();
 	});
 
 	function handleMealClick() {
@@ -150,15 +158,11 @@
 
 	var calorieAdder = function calorieAdder(meals, goal, total) {
 	    var remaining = goal - total;
-	    if (remaining < 0) {
-	        return remaining;
-	    } else colorRed(meals);
 	    return remaining;
 	};
 
-	var totalCals = [];
-
 	var fillMeals = function fillMeals(meals) {
+	    var totalCals = [];
 	    meals.forEach(function (meal) {
 	        $('.meal-container').append('\n        <table class=\'meal-table\' id=\'meal' + meal.id + '\'>\n        <h2>' + meal.name + '</h2>\n        <tr>\n            <th>Name</th>\n            <th>Calories</th>\n        </tr>\n        </table>\n        ');
 	        meal.foods.forEach(function (food) {
@@ -168,18 +172,35 @@
 	        totals(meal);
 	    });
 	    var fillTotals = function fillTotals() {
-	        var totalCalories = totalCals.reduce(function (a, b) {
-	            return a + b;
-	        }, 0);
+	        var totalCalories = function totalCalories() {
+	            return totalCals.reduce(function (a, b) {
+	                return a + b;
+	            }, 0);
+	        };
+	        var calsRemainingCalc = 2000 - totalCalories();
 	        $('.goal-calories').append('<td>2000</td>');
-	        $('.calories-consumed').append('<td>' + totalCalories + '</td>');
-	        $('.calories-remaining').append('<td>' + (2000 - totalCalories) + '</td>');
+	        $('.calories-consumed').append('<td>' + totalCalories() + '</td>');
+	        $('.calories-remaining').append('<td>' + calsRemainingCalc + '</td>');
+	        if (calsRemainingCalc < 0) {
+	            document.getElementById('calories-remaining').style.color = "red";
+	        } else {
+	            document.getElementById('calories-remaining').style.color = "green";
+	        }
 	    };
 	    fillTotals();
 	};
 
 	var totals = exports.totals = function totals(meal) {
 	    $('#meal' + meal.id).append('\n         <h4 class=\'total-calories\'>Total Calories : ' + getCalories(meal) + '</h4>\n         <h4 class = \'remaining-calories\' id=\'remaining' + meal.id + '\'>Remaining Calories : ' + remainingCalories(meal, getCalories(meal)) + '</h4>\n        ');
+	    changeColor(meal);
+	};
+
+	var changeColor = exports.changeColor = function changeColor(meal) {
+	    if (remainingCalories(meal, getCalories(meal)) < 0) {
+	        document.getElementById('remaining' + meal.id).style.color = "red";
+	    } else {
+	        document.getElementById('remaining' + meal.id).style.color = "green";
+	    }
 	};
 
 	var getCalories = exports.getCalories = function getCalories(meal) {
@@ -188,10 +209,6 @@
 	            return acc += food.calories;
 	        }, 0);
 	    } else return 0;
-	};
-
-	var colorRed = function colorRed(meal) {
-	    $('.meal-table').children('#remaining' + meal.id).css('color', 'red');
 	};
 
 	var getMealFood = exports.getMealFood = function getMealFood() {
@@ -230,6 +247,59 @@
 	    });
 	};
 
+	var searchFoods = exports.searchFoods = function searchFoods() {
+	    var input = void 0,
+	        filter = void 0,
+	        table = void 0,
+	        tr = void 0,
+	        td = void 0,
+	        i = void 0;
+	    input = document.getElementById("search-meal-food");
+	    filter = input.value.toUpperCase();
+	    table = document.getElementById('meal-food-table');
+	    tr = table.getElementsByTagName("tr");
+	    for (i = 1; i < tr.length; i++) {
+	        td = tr[i].getElementsByTagName("td")[0];
+	        if (td) {
+	            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	                tr[i].style.display = "";
+	            } else {
+	                tr[i].style.display = "none";
+	            }
+	        }
+	    }
+	};
+
+	var sortCals = exports.sortCals = function sortCals() {
+	    var table = void 0,
+	        rows = void 0,
+	        switching = void 0,
+	        i = void 0,
+	        x = void 0,
+	        y = void 0,
+	        shouldSwitch = void 0;
+	    table = document.getElementById("meal-food-table");
+	    switching = true;
+
+	    while (switching) {
+	        switching = false;
+	        rows = table.getElementsByTagName("tr");
+	        for (i = 1; i < rows.length - 1; i++) {
+	            shouldSwitch = false;
+	            x = rows[i].getElementsByTagName("td")[1];
+	            y = rows[i + 1].getElementsByTagName("td")[1];
+	            if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+	                shouldSwitch = true;
+	                break;
+	            }
+	        }
+	        if (shouldSwitch) {
+	            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+	            switching = true;
+	        }
+	    }
+	};
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
@@ -257,6 +327,25 @@
 
 	$('.food-button').click(function () {
 	    return validateForm(event);
+	});
+
+	$('#search-food').on('keyup', function () {
+	    var input, filter, table, tr, td, i;
+	    input = document.getElementById("search-food");
+	    filter = input.value.toUpperCase();
+	    table = document.getElementById('food-table');
+	    tr = table.getElementsByTagName("tr");
+
+	    for (i = 1; i < tr.length; i++) {
+	        td = tr[i].getElementsByTagName("td")[0];
+	        if (td) {
+	            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	                tr[i].style.display = "";
+	            } else {
+	                tr[i].style.display = "none";
+	            }
+	        }
+	    }
 	});
 
 	function handleFoodDelete() {
@@ -361,25 +450,6 @@
 	        return console.error(error);
 	    });
 	};
-
-	$('#search-food').on('keyup', function () {
-	    var input, filter, table, tr, td, i;
-	    input = document.getElementById("search-food");
-	    filter = input.value.toUpperCase();
-	    table = document.getElementById('food-table');
-	    tr = table.getElementsByTagName("tr");
-
-	    for (i = 1; i < tr.length; i++) {
-	        td = tr[i].getElementsByTagName("td")[0];
-	        if (td) {
-	            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-	                tr[i].style.display = "";
-	            } else {
-	                tr[i].style.display = "none";
-	            }
-	        }
-	    }
-	});
 
 /***/ })
 /******/ ]);
