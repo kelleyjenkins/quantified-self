@@ -97,7 +97,7 @@
 	        name: foodName,
 	        calories: foodCal
 	    });
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/meals/' + mealId + '/foods/' + foodId, {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/meals/' + mealId + '/foods/' + foodId, {
 	        method: 'post',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: body
@@ -109,7 +109,7 @@
 	}
 
 	var removeFoodAssociation = exports.removeFoodAssociation = function removeFoodAssociation(mealId, foodId) {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/meals/' + mealId + '/foods/' + foodId, {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/meals/' + mealId + '/foods/' + foodId, {
 	        method: 'Delete'
 	    }).then(function (response) {
 	        return console.log(response);
@@ -119,7 +119,7 @@
 	};
 
 	var getMeals = exports.getMeals = function getMeals() {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/meals').then(function (response) {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/meals').then(function (response) {
 	        return response.json();
 	    }).then(function (myJson) {
 	        var meals = Object.keys(myJson).map(function (thing) {
@@ -130,7 +130,7 @@
 	};
 
 	var getMealFood = exports.getMealFood = function getMealFood() {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods').then(function (response) {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/foods').then(function (response) {
 	        return response.json();
 	    }).then(function (myJson) {
 	        var foods = Object.keys(myJson).map(function (thing) {
@@ -142,7 +142,7 @@
 	};
 
 	var addSelected = exports.addSelected = function addSelected(meals) {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/meals').then(function (response) {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/meals').then(function (response) {
 	        return response.json();
 	    }).then(function (myJson) {
 	        var meals = Object.keys(myJson).map(function (thing) {
@@ -171,7 +171,7 @@
 	        name: foodName,
 	        calories: foodCal
 	    });
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods/' + foodId, {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/foods/' + foodId, {
 	        method: 'put',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: body
@@ -181,7 +181,7 @@
 	};
 
 	var getFood = exports.getFood = function getFood() {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods').then(function (response) {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/foods', { 'Access-Control-Allow-Origin': '*' }).then(function (response) {
 	        return response.json();
 	    }).then(function (myJson) {
 	        var foods = Object.keys(myJson).map(function (thing) {
@@ -193,7 +193,7 @@
 	};
 
 	var delFood = exports.delFood = function delFood(id) {
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods/' + id, {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/foods/' + id, {
 	        method: 'DELETE'
 	    }).then(function (response) {
 	        return handleResponse(response);
@@ -205,7 +205,7 @@
 	var createFood = exports.createFood = function createFood(foodName, cal, event) {
 	    var food = { name: foodName,
 	        calories: cal };
-	    fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/foods', {
+	    fetch('https://salty-escarpment-41029.herokuapp.com/api/foods', {
 	        headers: { 'Accept': 'application/json',
 	            'Content-Type': 'application/json' },
 	        method: 'post',
@@ -324,8 +324,8 @@
 	};
 
 	var addFoodRow = exports.addFoodRow = function addFoodRow(food) {
-	    $('.food-table tbody').append('\n     <tr class = \'' + food[0] + '\'>\n     <td contenteditable="true" class="food-name" id="food' + food[0] + '">' + food[1] + '</td>\n     <td contenteditable="true" class="food-name" id="foodCal' + food[0] + '">' + food[2] + '</td>\n     <td><button class="food' + food[0] + ' food-delete">Delete</button></td>\n     </tr>');
-	    $('.food' + food[0]).on('click', function () {
+	    $('.food-table tbody').append('\n     <tr class = \'' + food[0].id + '\'>\n     <td contenteditable="true" class="food-name" id="food' + food[0].name + '">' + food[0].name + '</td>\n     <td contenteditable="true" class="food-name" id="foodCal' + food[0].calories + '">' + food[0].calories + '</td>\n     <td><button class="food' + food[0].id + ' food-delete">Delete</button></td>\n     </tr>');
+	    $('.food' + food[0].id).on('click', function () {
 	        handleFoodDelete.call(this);
 	    });
 	};
@@ -404,9 +404,9 @@
 	    if (meals.id === 1 || meals.id === 'meal1') {
 	        return calorieAdder(meals, 400, total);
 	    } else if (meals.id === 2 || meals.id === 'meal2') {
-	        return calorieAdder(meals, 200, total);
-	    } else if (meals.id === 3 || meals.id === 'meal3') {
 	        return calorieAdder(meals, 600, total);
+	    } else if (meals.id === 3 || meals.id === 'meal3') {
+	        return calorieAdder(meals, 200, total);
 	    } else if (meals.id === 4 || meals.id === 'meal4') {
 	        return calorieAdder(meals, 800, total);
 	    } else {
@@ -423,7 +423,7 @@
 
 	var fillMeals = exports.fillMeals = function fillMeals(meals) {
 	    meals.forEach(function (meal) {
-	        $('.meal-container').append('\n        <div class=\'table-container\' id =\'table' + meal.id + '\'>\n        <table class=\'meal-table\' id=\'meal' + meal.id + '\'>\n        <h2>' + meal.name + '</h2>\n        <trid =\'header' + meal.id + '\'></tr>\n        <tr>\n            <th>Name</th>\n            <th>Calories</th>\n        </tr>\n        </table>\n        </div>\n        ');
+	        $('.meal-container').append('\n        <div class=\'table-container\' id =\'table' + meal.id + '\'>\n        <table label=\'meal-table\'class=\'meal-table\' id=\'meal' + meal.id + '\'>\n        <h2>' + meal.name + '</h2>\n        <trid =\'header' + meal.id + '\'></tr>\n        <tr>\n            <th>Name</th>\n            <th>Calories</th>\n        </tr>\n        </table>\n        </div>\n        ');
 	        fillmealfoodrow(meal);
 	        totalCals.push(getCalories(meal));
 	        totals(meal);
@@ -433,7 +433,7 @@
 
 	var fillmealfoodrow = exports.fillmealfoodrow = function fillmealfoodrow(meal) {
 	    meal.foods.forEach(function (food) {
-	        $('#meal' + meal.id).append('\n    <tr class=\'meal-row\' id=' + meal.id + '>\n        <td class=\'food-name\' id=\'meal' + food.id + '\'>' + food.name + '</td>\n        <td class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n        <td><button id = ' + food.id + ' class=\'food' + food.id + ' food-remove\'>Delete</button></td>\n    </tr>\n    ');
+	        $('#meal' + meal.id).append('\n    <tr class=\'meal-row\' >\n        <td label=\'food-name\' class=\'food-name\' id=\'meal' + food.id + '\'>' + food.name + '</td>\n        <td label=\'food-cal\' class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n        <td><button id = ' + food.id + ' class=\'food' + food.id + ' food-remove\'>Delete</button></td>\n    </tr>\n    ');
 	    });
 	};
 
@@ -447,7 +447,7 @@
 	    $('.cals-consumed').html('<td>' + totalCalories() + '</td>');
 	    $('.remaining-cals').html('<td>' + calsRemainingCalc + '</td>');
 	    if (calsRemainingCalc < 0) {
-	        document.getElementById('calories-remaining').style.color = "red";
+	        document.getElementById('calories-remaining').style.color = "#8b0000";
 	    } else {
 	        document.getElementById('calories-remaining').style.color = "green";
 	    }
@@ -460,7 +460,7 @@
 
 	var changeColor = exports.changeColor = function changeColor(meal) {
 	    if (remainingCalories(meal, getCalories(meal)) < 0) {
-	        document.getElementById('remainingmeal' + meal.id).style.color = "red";
+	        document.getElementById('remainingmeal' + meal.id).style.color = "#8b0000";
 	    } else {
 	        document.getElementById('remainingmeal' + meal.id).style.color = "green";
 	    }
@@ -539,7 +539,7 @@
 
 	var MealFoodTable = exports.MealFoodTable = function MealFoodTable(food) {
 	    food.forEach(function (food) {
-	        $('.meal-food-table').find('tbody').append('\n        <tr class=\'food-row\' id=' + food.id + '>\n            <td contenteditable=true class=\'food-name\' id=\'food' + food.id + '\'>' + food.name + '</td>\n            <td contenteditable=true class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n           <td> <input id="checkBox" type="checkbox"> </td>\n        </tr>\n        ');
+	        $('.meal-food-table').find('tbody').append('\n        <tr class=\'food-row\' id=' + food.id + '>\n            <td contenteditable=true class=\'food-name\' id=\'food' + food.id + '\'>' + food.name + '</td>\n            <td contenteditable=true class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n           <td> <input title="checkbox" id="checkBox" type="checkbox"><label="checkbox"></label> </td>\n        </tr>\n        ');
 	    });
 	    fillArray();
 	};
@@ -563,7 +563,7 @@
 	};
 
 	function handleMealDelete() {
-	    var mealId = this.closest('.meal-row').id;
+	    var mealId = this.closest('.meal-table').id.split('').pop();
 	    var foodId = this.id;
 	    (0, _meal_service.removeFoodAssociation)(mealId, foodId);
 	    this.closest('.meal-row').remove();
@@ -604,7 +604,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat);", ""]);
 
 	// module
-	exports.push([module.id, "h1 {\n  color: green;\n}\n\nbody {\n  font-family: 'Montserrat', sans-serif ;\n  margin: 30px;\n}\n.food-table, .meal-food-table {\n  border-collapse: collapse;\n  width: 40%;\n  margin-top: 10px;\n}\n\n.food-table td, .food-table th, .meal-food-table td, .meal-food-table th {\nborder: 1px solid #ddd;\nborder-right: none;\npadding: 8px;\n}\n\n.food-table td:nth-child(3), .meal-table td:nth-child(3), .meal-food-table td:nth-child(3){\n  border: none; border-left: 1px solid #ddd\n}\n\n\n.food-table th, .meal-food-table th {\npadding-top: 8px;\npadding-bottom: 8px;\ntext-align: left;\nbackground-color: #6290C8\t;\ncolor: black;\n}\n\n.meal-table th {\npadding-top: 3px;\npadding-bottom: 3px;\ntext-align: left;\nbackground-color: #6290C8\t;\ncolor: black;\nfont-size: 3px;\n}\n\n.meal-table td, .meal-table th {\n  border: 1px solid #ddd;\n  padding: 8px;\n}\n\n.meal-table {\n  border-collapse: collapse;\n  margin-top: 10px;\n}\n\n\n.meal-table th, .meal-table td {\n  font-size: 14px;\n\n}\n\n#search-food, #search-meal-food {\n  margin-top: 20px;\n  height: 20px;\n  font-size: 16px\n}\n\n.name-input, .cal-input {\n  margin-bottom: 20px;\n  height: 20px;\n  font-size: 16px\n}\n\n.table-container {\n  display: flex;\n  flex-direction: column;\n}\n.meal-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n\n.new-food {\n  height: 25px;\n  font-size: 14px;\n  margin-bottom: 30px;\n  box-shadow: 1px 1px 1px\n}\n\n.table-container {\n  border: 2px solid grey;\n  border-radius: 10px;\n  padding: 15px;\n  box-shadow: 1px 1px 1px;\n}\n", ""]);
+	exports.push([module.id, "h1 {\n  color: green;\n}\n\nbody {\n  font-family: 'Montserrat', sans-serif ;\n  margin: 30px;\n}\n.food-table, .meal-food-table {\n  border-collapse: collapse;\n  width: 40%;\n  margin-top: 10px;\n}\n\n.food-table td, .food-table th, .meal-food-table td, .meal-food-table th {\n  border: 1px solid #ddd;\n  border-right: none;\n  padding: 8px;\n}\n\n.food-table td:nth-child(3), .meal-table td:nth-child(3), .meal-food-table td:nth-child(3){\n  border: none; border-left: 1px solid #ddd\n}\n\n\n.food-table th, .meal-food-table th {\npadding-top: 8px;\npadding-bottom: 8px;\ntext-align: left;\nbackground-color: #6290C8\t;\ncolor: black;\n}\n\n.meal-table th {\npadding-top: 3px;\npadding-bottom: 3px;\ntext-align: left;\nbackground-color: #6290C8\t;\ncolor: black;\nfont-size: 3px;\n}\n\n.meal-table td, .meal-table th {\n  border: 1px solid #ddd;\n  padding: 8px;\n}\n\n.meal-table {\n  border-collapse: collapse;\n  margin-top: 10px;\n}\n\n\n.meal-table th, .meal-table td {\n  font-size: 14px;\n\n}\n\n#search-food, #search-meal-food {\n  margin-top: 20px;\n  height: 20px;\n  font-size: 16px\n}\n\n.name-input, .cal-input {\n  margin-bottom: 20px;\n  height: 20px;\n  font-size: 16px\n}\n\n.table-container {\n  display: flex;\n  flex-direction: column;\n}\n.meal-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n}\n\n.new-food {\n  height: 25px;\n  font-size: 14px;\n  margin-bottom: 30px;\n  box-shadow: 1px 1px 1px\n}\n\n.table-container {\n  border: 2px solid grey;\n  border-radius: 10px;\n  padding: 15px;\n  box-shadow: 1px 1px 1px;\n}\n", ""]);
 
 	// exports
 
