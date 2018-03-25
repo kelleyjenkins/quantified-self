@@ -15,9 +15,9 @@ body {
 }
 
 .food-table td, .food-table th, .meal-food-table td, .meal-food-table th {
-border: 1px solid #ddd;
-border-right: none;
-padding: 8px;
+  border: 1px solid #ddd;
+  border-right: none;
+  padding: 8px;
 }
 
 .food-table td:nth-child(3), .meal-table td:nth-child(3), .meal-food-table td:nth-child(3){
@@ -77,7 +77,7 @@ font-size: 3px;
 .meal-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .new-food {
