@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
   <meta charset="utf-8">
   <title>Quantified Self - Diary</title>
 </head>
+
 <body>
-<main>
-<h1> Quantified Self </h1>
-<h2> Meal Diary </h2>
+  <main>
+    <h1> Quantified Self </h1>
+    <h2> Meal Diary </h2>
 
-<div class='meal-container'>
-</div>
-
-<table class="total-table"><h2>Totals</h2>
-  <tr>
-    <th class="category"></th>
-    <th class="calories"></th>
-  </tr>
-  <tr class="goal-calories">
-    <td>Goal Calories</td>
-    <td class=goal-cals>2000</td>
-  </tr>
-  <tr class="calories-consumed">
-    <td>Calories Consumed</td>
-    <td class=cals-consumed></td>
-  </tr>
-  <tr class="calories-remaining" id="calories-remaining">
-    <td>Remaining Calories</td>
-    <td class=remaining-cals></td>
-  </tr>
-</table>
-
-
-<div class = 'add-selected'>
-
+  <div class='meal-container'>
   </div>
-<div class='food-container'>
-  <h2>Food</h2>
-  <button type="button" name="Create New" class="new-food">Create New</button>
-</br>
-  <input title= 'foodsearch' label='search' type="text" id="search-meal-food" placeholder="Filter by Name">
-  <table class='meal-food-table' id ='meal-food-table'>
+
+  <table class="total-table"><h2>Totals</h2>
     <tr>
-      <th>Name</th>
-      <th id="cals">Calories</th>
+      <th class="category"></th>
+      <th class="calories"></th>
+    </tr>
+    <tr class="goal-calories">
+      <td>Goal Calories</td>
+      <td class=goal-cals>2000</td>
+    </tr>
+    <tr class="calories-consumed">
+      <td>Calories Consumed</td>
+      <td class=cals-consumed></td>
+    </tr>
+    <tr class="calories-remaining" id="calories-remaining">
+      <td>Remaining Calories</td>
+      <td class=remaining-cals></td>
     </tr>
   </table>
+
+  <div class = 'add-selected'>
   </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="main.bundle.js"></script>
+  <div class='food-container'>
+    <h2>Food</h2>
+    <button type="button" name="Create New" class="new-food">Create New</button>
+    </br>
+    <input title= 'foodsearch' label='search' type="text" id="search-meal-food" placeholder="Filter by Name">
 
-</main>
+    <table class='meal-food-table' id ='meal-food-table'>
+      <tr>
+        <th>Name</th>
+        <th id="cals">Calories</th>
+      </tr>
+    </table>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="main.bundle.js"></script>
+
+  </main>
 </body>
 </html>
