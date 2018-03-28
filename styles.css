@@ -82,7 +82,7 @@ font-size: 3px;
   justify-content: space-around;
 }
 
-.food-delete, .food-button {
+.food-delete, .food-button, .food-remove {
   height: 25px;
   font-size: 14px;
 }
