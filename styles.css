@@ -82,11 +82,9 @@ font-size: 3px;
   justify-content: space-around;
 }
 
-.new-food {
+.food-delete, .food-button {
   height: 25px;
   font-size: 14px;
-  margin-bottom: 30px;
-  box-shadow: 1px 1px 1px
 }
 
 .table-container {
@@ -96,8 +94,8 @@ font-size: 3px;
   box-shadow: 1px 1px 1px;
 }
 
-.manage-meal-button {
-  background-color: grey;
+.manage-meal-button, .new-food, .meal-button {
+  background-color: #464646;
   border: none;
   color: white;
   padding: 10px 15px;
@@ -105,4 +103,19 @@ font-size: 3px;
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
+  border-radius: 25px;
+
+}
+
+.meal-button {
+  background-color: #6491C6;
+  border: none;
+  color: black;
+  padding: 10px 15px;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;
 }
