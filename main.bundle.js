@@ -81,17 +81,6 @@
 
 	var _meal_view = __webpack_require__(4);
 
-	// export const getOneMeal = () => {
-	//     fetch('https://radiant-mesa-11168.herokuapp.com/api/v1/meals')
-	//         .then(function(response) {
-	//             return response.json();
-	//         })
-	//         .then(function(myJson) {
-	//            const meals =  Object.keys(myJson).map((thing) =>  myJson[thing])
-	//         });
-
-	// }
-
 	function updateMealFood(mealId, foodId, foodName, foodCal) {
 	    var body = JSON.stringify({
 	        name: foodName,
@@ -236,7 +225,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.addFoodRow = exports.validateForm = exports.fillTable = exports.sortFood = exports.searchFoods = undefined;
 	exports.handleFoodDelete = handleFoodDelete;
@@ -245,89 +234,89 @@
 	var _food_service = __webpack_require__(2);
 
 	var searchFoods = exports.searchFoods = function searchFoods() {
-	    var input, filter, table, tr, td, i;
-	    input = document.getElementById("search-food");
-	    filter = input.value.toUpperCase();
-	    table = document.getElementById('food-table');
-	    tr = table.getElementsByTagName("tr");
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("search-food");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById('food-table');
+	  tr = table.getElementsByTagName("tr");
 
-	    for (i = 1; i < tr.length; i++) {
-	        td = tr[i].getElementsByTagName("td")[0];
-	        if (td) {
-	            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-	                tr[i].style.display = "";
-	            } else {
-	                tr[i].style.display = "none";
-	            }
-	        }
+	  for (i = 1; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    if (td) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
 	    }
+	  }
 	};
 
 	function handleFoodDelete() {
 
-	    var foodRowId = '';
-	    var result = '';
+	  var foodRowId = '';
+	  var result = '';
 
-	    if (this.closest('.food-row')) {
-	        foodRowId = this.closest('.food-row').id;
-	        (0, _food_service.delFood)(foodRowId);
-	        this.closest('.food-row').remove();
-	    } else {
-	        foodRowId = this.parentNode.parentNode.className;
-	        this.parentNode.parentNode.remove();
-	        (0, _food_service.delFood)(foodRowId);
-	    }
+	  if (this.closest('.food-row')) {
+	    foodRowId = this.closest('.food-row').id;
+	    (0, _food_service.delFood)(foodRowId);
+	    this.closest('.food-row').remove();
+	  } else {
+	    foodRowId = this.parentNode.parentNode.className;
+	    this.parentNode.parentNode.remove();
+	    (0, _food_service.delFood)(foodRowId);
+	  }
 	}
 
 	function handleFoodClick(attribute) {
-	    var childId = '';
-	    var inputId = '';
-	    var foodRowId = this.closest('.food-row').id;
-	    if (attribute === 'name') {
-	        childId = $('#' + foodRowId + ' .food-cal').text();
-	        inputId = this.innerText;
-	        (0, _food_service.putFood)(inputId, childId, foodRowId);
-	    } else {
-	        childId = $('#' + foodRowId + ' .food-name').text();
-	        inputId = this.innerText;
-	        (0, _food_service.putFood)(childId, inputId, foodRowId);
-	    }
+	  var childId = '';
+	  var inputId = '';
+	  var foodRowId = this.closest('.food-row').id;
+	  if (attribute === 'name') {
+	    childId = $('#' + foodRowId + ' .food-cal').text();
+	    inputId = this.innerText;
+	    (0, _food_service.putFood)(inputId, childId, foodRowId);
+	  } else {
+	    childId = $('#' + foodRowId + ' .food-name').text();
+	    inputId = this.innerText;
+	    (0, _food_service.putFood)(childId, inputId, foodRowId);
+	  }
 	}
 
 	var sortFood = exports.sortFood = function sortFood(food) {
-	    var result = food.sort(function (a, b) {
-	        if (a.id > b.id) {
-	            return -1;
-	        } else {
-	            return 1;
-	        }
-	    });
-	    return result;
+	  var result = food.sort(function (a, b) {
+	    if (a.id > b.id) {
+	      return -1;
+	    } else {
+	      return 1;
+	    }
+	  });
+	  return result;
 	};
 
 	var fillTable = exports.fillTable = function fillTable(food) {
-	    food.forEach(function (food) {
-	        $('.food-table').append('\n         <tr class=\'food-row\' id=' + food.id + '>\n             <td contenteditable=true class=\'food-name\' id=\'food' + food.id + '\'>' + food.name + '</td>\n             <td contenteditable=true class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n             <td><button class=\'food' + food.id + ' food-delete\'>Delete</button></td>\n         </tr>\n         ');
-	    });
+	  food.forEach(function (food) {
+	    $('.food-table').append('\n     <tr class=\'food-row\' id=' + food.id + '>\n         <td contenteditable=true class=\'food-name\' id=\'food' + food.id + '\'>' + food.name + '</td>\n         <td contenteditable=true class=\'food-cal\' id=\'foodCal' + food.id + '\'>' + food.calories + '</td>\n         <td><button class=\'food' + food.id + ' food-delete\'>Delete</button></td>\n     </tr>\n     ');
+	  });
 	};
 
 	var validateForm = exports.validateForm = function validateForm(event) {
-	    event.preventDefault();
-	    $('.food-error').remove();
-	    var foodName = $('.name-input').val();
-	    var foodCal = $('.cal-input').val();
-	    if (foodName === "") {
-	        $('.food-form').append('<div class = \'food-error\'>Please enter a food name </div>');
-	    } else if (foodCal === "") {
-	        $('.food-form').append('<div class = \'food-error\'>Please enter a calorie amount</div>');
-	    } else (0, _food_service.createFood)(foodName, foodCal);
+	  event.preventDefault();
+	  $('.food-error').remove();
+	  var foodName = $('.name-input').val();
+	  var foodCal = $('.cal-input').val();
+	  if (foodName === "") {
+	    $('.food-form').append('<div class = \'food-error\'>Please enter a food name </div>');
+	  } else if (foodCal === "") {
+	    $('.food-form').append('<div class = \'food-error\'>Please enter a calorie amount</div>');
+	  } else (0, _food_service.createFood)(foodName, foodCal);
 	};
 
 	var addFoodRow = exports.addFoodRow = function addFoodRow(food) {
-	    $('.food-table tbody').append('\n     <tr class = \'' + food[0].id + '\'>\n     <td contenteditable="true" class="food-name" id="food' + food[0].name + '">' + food[0].name + '</td>\n     <td contenteditable="true" class="food-name" id="foodCal' + food[0].calories + '">' + food[0].calories + '</td>\n     <td><button class="food' + food[0].id + ' food-delete">Delete</button></td>\n     </tr>');
-	    $('.food' + food[0].id).on('click', function () {
-	        handleFoodDelete.call(this);
-	    });
+	  $('.food-table tbody').append('\n    <tr class = \'' + food[0].id + '\'>\n    <td contenteditable="true" class="food-name" id="food' + food[0].name + '">' + food[0].name + '</td>\n    <td contenteditable="true" class="food-name" id="foodCal' + food[0].calories + '">' + food[0].calories + '</td>\n    <td><button class="food' + food[0].id + ' food-delete">Delete</button></td>\n    </tr>');
+	  $('.food' + food[0].id).on('click', function () {
+	    handleFoodDelete.call(this);
+	  });
 	};
 
 /***/ }),
@@ -346,8 +335,6 @@
 	exports.handleMealDelete = handleMealDelete;
 
 	var _meal_service = __webpack_require__(1);
-
-	// import { reporters } from 'mocha';
 
 	function clearCheckBoxes() {
 	    $('input:checkbox').prop('checked', false);
@@ -376,7 +363,7 @@
 	        $('#totalCals' + meal.id).html('Total Calories : ' + totes);
 	        $('#remaining' + meal.id).html('Remaining Calories: ' + remainingCalories(meal, totes) + '</h4>');
 	        if (remainingCalories(meal, totes) < 0) {
-	            document.getElementById('remaining' + meal.id).style.color = "red";
+	            document.getElementById('remaining' + meal.id).style.color = "#8b0000";
 	        } else {
 	            document.getElementById('remaining' + meal.id).style.color = "green";
 	        }
@@ -394,7 +381,7 @@
 	    $('.cals-consumed').html('' + totalTableCalories());
 	    $('.remaining-cals').html('' + remainingTableCals);
 	    if (remainingTableCals < 0) {
-	        document.getElementById('calories-remaining').style.color = "red";
+	        document.getElementById('calories-remaining').style.color = "#8b0000";
 	    } else {
 	        document.getElementById('calories-remaining').style.color = "green";
 	    }
