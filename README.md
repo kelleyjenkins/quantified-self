@@ -3,9 +3,9 @@
 Quantified Self is an app that allows users to track foods and calories by meal. Users can create new foods, add foods to specific meals, delete foods, delete foods from meals, sort food list by calories and edit foods in the table. The front-end is built with JavaScript, JQuery, HTML and CSS. 
 
 ### Deployment
- The front-end for this app is deployed at <https://kelleyjenkins.github.io/quantified-self/>
- The back-end for this app is deployed at <https://salty-escarpment-41029.herokuapp.com>
- The back-end repo can be found here: <https://github.com/zacharylandes/quantified-api>
+ The front-end for this app is deployed at <https://kelleyjenkins.github.io/quantified-self/>  
+ The back-end for this app is deployed at <https://salty-escarpment-41029.herokuapp.com>  
+ The back-end repo can be found here: <https://github.com/zacharylandes/quantified-api>  
 
 ## Getting Started
 
