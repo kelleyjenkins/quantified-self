@@ -12,6 +12,7 @@ body {
   border-collapse: collapse;
   width: 40%;
   margin-top: 10px;
+  margin-bottom: 15px
 }
 
 .food-table td, .food-table th, .meal-food-table td, .meal-food-table th {
@@ -74,6 +75,7 @@ font-size: 3px;
   display: flex;
   flex-direction: column;
 }
+
 .meal-container {
   display: flex;
   flex-direction: row;
@@ -92,4 +94,15 @@ font-size: 3px;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 1px 1px 1px;
+}
+
+.manage-meal-button {
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
 }
