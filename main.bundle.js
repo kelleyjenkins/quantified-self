@@ -313,7 +313,7 @@
 	};
 
 	var addFoodRow = exports.addFoodRow = function addFoodRow(food) {
-	  $('.food-table tbody').append('\n    <tr class = \'' + food[0].id + '\'>\n    <td contenteditable="true" class="food-name" id="food' + food[0].name + '">' + food[0].name + '</td>\n    <td contenteditable="true" class="food-name" id="foodCal' + food[0].calories + '">' + food[0].calories + '</td>\n    <td><button class="food' + food[0].id + ' food-delete"><span><i class="icon-trash"></i></span></button></td>\n    </tr>');
+	  $('.food-table tbody').append('\n    <tr class = \'' + food[0].id + '\'>\n    <td contenteditable="true" class="food-name" id="food' + food[0].name + '">' + food[0].name + '</td>\n    <td contenteditable="true" class="food-name" id="foodCal' + food[0].calories + '">' + food[0].calories + '</td>\n    <td><button class="food' + food[0].id + ' food-delete">Delete</button></td>\n    </tr>');
 	  $('.food' + food[0].id).on('click', function () {
 	    handleFoodDelete.call(this);
 	  });
